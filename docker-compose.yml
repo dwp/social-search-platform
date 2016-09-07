@@ -5,22 +5,29 @@ services:
     build: ./slack-api-export
     image: social-search-app
 
-  http:
+  php-fpm:
     build:
       context: ./slack-api-export
-      dockerfile: Dockerfile.http
+      dockerfile: Dockerfile.fpm
     environment:
       - SLACK_CLIENT_ID
       - SLACK_CLIENT_SECRET
       - SLACK_CLIENT_REDIRECT_URI
-    depends_on:
-      - base
     links:
       - mongo
-    ports:
-      - 8000:8000
     volumes:
-      - ./logs/http:/opt/slack-api-export/var/logs
+      - ./logs/http:/var/www/slack-api-export/var/logs
+
+  web:
+    build:
+      context: ./slack-api-export
+      dockerfile: Dockerfile.nginx
+    links:
+      - php-fpm
+    ports:
+      - 80:8080
+    volumes:
+      - ./logs/nginx:/var/log/nginx/
 
   console:
     build:

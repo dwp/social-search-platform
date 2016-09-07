@@ -2,9 +2,12 @@
 
 function checkoutLatestTag {
     cd $1
-    git fetch
-    TAG=`git describe --tags --always`
-    git checkout ${TAG} --quiet
+    git checkout master
+    git pull
+    #git fetch
+    #TAG=`git describe --tags --always`
+    #printf "> checking out tag ${TAG}.\n"
+    #git checkout ${TAG} --quiet
 }
 
 # formatting
