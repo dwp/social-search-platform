@@ -13,9 +13,9 @@ NC='\033[0m' # No Color
 
 # get our initial data
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
-SLACK_APP="slack-api-export"
+SLACK_APP='slack-api-export'
 SLACK_APP_DIR="${SCRIPTDIR}/${SLACK_APP}"
-SOCIAL_SEARCH="social-search"
+SOCIAL_SEARCH='social-search'
 SOCIAL_SEARCH_DIR="${SCRIPTDIR}/${SOCIAL_SEARCH}"
 
 # install social search
@@ -33,11 +33,11 @@ fi
 checkoutLatestTag ${SLACK_APP_DIR}
 
 # check .env is setup
-if [ ! -f '${SCRIPTDIR}/.env' ]; then
+if [ ! -f "${SCRIPTDIR}/.env" ]; then
     printf "${RED}Error:${NC} docker-compose .env file is not found, please complete project setup as per readme.md before running this file.\n"
     exit
 fi
 
 # run docker-compose for our own build
 cd ${SCRIPTDIR}
-docker-compose up
+docker-compose up --build
