@@ -3,31 +3,35 @@ services:
 
   base:
     build: ./slack-api-export
-    image: social-search-app
+    image: slackapiexport_base
 
   php-fpm:
     build:
       context: ./slack-api-export
       dockerfile: Dockerfile.fpm
     environment:
+      - SLACK_TOKEN
       - SLACK_CLIENT_ID
       - SLACK_CLIENT_SECRET
       - SLACK_CLIENT_REDIRECT_URI
     links:
       - mongo
     volumes:
-      - ./logs/http:/var/www/slack-api-export/var/logs
+      - ./docker/slack_export/messages:/var/www/slack-api-export/var/messages
+      - ./docker/slack_export/cache:/var/www/slack-api-export/var/cache
+      - ./docker/slack_export/logs:/var/www/slack-api-export/var/logs
+      - ./docker/slack_export/sessions:/var/www/slack-api-export/var/sessions
 
-  web:
+  nginx:
     build:
-      context: ./slack-api-export
+      context: .
       dockerfile: Dockerfile.nginx
     links:
       - php-fpm
     ports:
-      - 80:8080
+      - 8080:80
     volumes:
-      - ./logs/nginx:/var/log/nginx/
+      - ./docker/nginx:/var/log/nginx/
 
   console:
     build:
@@ -38,10 +42,9 @@ services:
     links:
       - mongo
     volumes:
-      - ./logs/console:/opt/slack-api-export/var/logs
-      - ./export:/opt/slack-api-export/var/export
+      - ./docker/slack_export:/opt/slack-api-export/var
 
   mongo:
     image: mongo
     volumes:
-      - ./mongo:/data/db
+      - ./docker/mongo:/data/db

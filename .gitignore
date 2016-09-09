@@ -1,7 +1,6 @@
+.DS_Store
 /.env
 /.idea
-/mongo
-/export
-/logs
+/docker
 /slack-api-export
 /social-search

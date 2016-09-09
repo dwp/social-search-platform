@@ -1,0 +1,14 @@
+FROM nginx
+
+# copy our actual files
+COPY ./slack-api-export/src /var/www/slack-api-export
+WORKDIR /var/www/slack-api-export
+
+# copy our nginx config
+COPY ./config/nginx.conf /etc/nginx
+
+# and site config
+COPY ./slack-api-export/config/slack-api-export.conf /etc/nginx/conf.d/
+
+# remove default configuration
+RUN rm /etc/nginx/conf.d/default.conf
