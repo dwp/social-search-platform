@@ -58,6 +58,10 @@ services:
   social-search:
     build:
       context: ./social-search
+      args:
+        - MC_API_KEY
+        - ES_HOSTNAME=elasticsearch
+        - ES_PORT=9200
     ports:
       - "8081:8080"
     links:
