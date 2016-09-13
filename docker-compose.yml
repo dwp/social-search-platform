@@ -48,3 +48,17 @@ services:
     image: mongo
     volumes:
       - ./docker/mongo:/data/db
+
+  elasticsearch:
+    image: elasticsearch
+    volumes:
+      - ./config/elasticsearch:/usr/share/elasticsearch/config
+
+
+  social-search:
+    build:
+      context: ./social-search
+    ports:
+      - "8081:8080"
+    links:
+      - elasticsearch
