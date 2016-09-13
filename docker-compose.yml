@@ -53,6 +53,7 @@ services:
     image: elasticsearch
     volumes:
       - ./config/elasticsearch:/usr/share/elasticsearch/config
+      - ./docker/elasticsearch:/usr/share/elasticsearch/data
 
 
   social-search:
