@@ -14,8 +14,10 @@ services:
       - SLACK_CLIENT_ID
       - SLACK_CLIENT_SECRET
       - SLACK_CLIENT_REDIRECT_URI
+      - SYMFONY__SOCIAL_SEARCH_API=http://social-search:8080
     links:
       - mongo
+      - social-search
     volumes:
       - ./docker/slack_export/messages:/var/www/slack-api-export/var/messages
       - ./docker/slack_export/cache:/var/www/slack-api-export/var/cache
@@ -41,6 +43,7 @@ services:
       - base
     links:
       - mongo
+      - social-search
     volumes:
       - ./docker/slack_export:/opt/slack-api-export/var
 

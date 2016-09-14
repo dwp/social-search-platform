@@ -2,6 +2,8 @@ version: '2'
 services:
 
   php-fpm:
+    environment:
+      - SLACK_CLIENT_REDIRECT_URI=https://knowbot.localtunnel.me
     volumes:
       - /var/social-search-platform/slack_export/messages:/var/www/slack-api-export/var/messages
       - /var/social-search-platform/slack_export/cache:/var/www/slack-api-export/var/cache
@@ -24,3 +26,9 @@ services:
     volumes:
       - /opt/social-search-platform:/usr/share/elasticsearch/config
       - /var/social-search-platform/elasticsearch:/usr/share/elasticsearch/data
+
+  tunnel:
+    image: chuangbo/localtunnel
+    links:
+      - nginx
+    command: lt -l nginx -p 8080 -s knowbot
