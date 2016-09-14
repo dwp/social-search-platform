@@ -2,12 +2,10 @@
 
 function checkoutLatestTag {
     cd $1
-    git checkout master
-    git pull
-    #git fetch
-    #TAG=`git describe --tags --always`
-    #printf "> checking out tag ${TAG}.\n"
-    #git checkout ${TAG} --quiet
+    git fetch
+    TAG=`git describe --tags --always`
+    printf "> checking out tag ${TAG}.\n"
+    git checkout ${TAG} --quiet
 }
 
 # formatting
@@ -16,10 +14,11 @@ NC='\033[0m' # No Color
 
 # get our initial data
 SCRIPTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+BASEDIR="$( cd ${SCRIPTDIR}/../ && pwd )"
 SLACK_APP='slack-api-export'
-SLACK_APP_DIR="${SCRIPTDIR}/${SLACK_APP}"
+SLACK_APP_DIR="${BASEDIR}/${SLACK_APP}"
 SOCIAL_SEARCH='social-search'
-SOCIAL_SEARCH_DIR="${SCRIPTDIR}/${SOCIAL_SEARCH}"
+SOCIAL_SEARCH_DIR="${BASEDIR}/${SOCIAL_SEARCH}"
 
 # install social search
 printf "Validating ${SOCIAL_SEARCH} install.\n"
@@ -36,11 +35,11 @@ fi
 checkoutLatestTag ${SLACK_APP_DIR}
 
 # check .env is setup
-if [ ! -f "${SCRIPTDIR}/.env" ]; then
+if [ ! -f "${BASEDIR}/.env" ]; then
     printf "${RED}Error:${NC} docker-compose .env file is not found, please complete project setup as per readme.md before running this file.\n"
     exit
 fi
 
 # run docker-compose for our own build
-cd ${SCRIPTDIR}
+cd ${BASEDIR}
 docker-compose up --build
