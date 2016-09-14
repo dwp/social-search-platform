@@ -14,6 +14,8 @@ services:
       - SLACK_CLIENT_ID
       - SLACK_CLIENT_SECRET
       - SLACK_CLIENT_REDIRECT_URI
+    ports:
+      - "9000:9000"
     links:
       - mongo
     volumes:
@@ -52,6 +54,6 @@ services:
         - ES_HOSTNAME=elasticsearch
         - ES_PORT=9200
     ports:
-      - "8081:8080"
+      - "8080:8080"
     links:
       - elasticsearch
