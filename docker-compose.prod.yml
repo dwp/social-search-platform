@@ -22,17 +22,6 @@ services:
       - ./docker/slack_export/logs:/var/www/slack-api-export/var/logs
       - ./docker/slack_export/sessions:/var/www/slack-api-export/var/sessions
 
-  nginx:
-    build:
-      context: .
-      dockerfile: Dockerfile.nginx
-    links:
-      - php-fpm
-    ports:
-      - 8080:80
-    volumes:
-      - ./docker/nginx:/var/log/nginx/
-
   console:
     build:
       context: ./slack-api-export
