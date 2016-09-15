@@ -31,4 +31,4 @@ services:
     image: chuangbo/localtunnel
     links:
       - nginx
-    command: lt -l nginx -p 8080 -s knowbot
+    command: lt -l nginx -p 80 -s knowbot

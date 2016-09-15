@@ -10,6 +10,7 @@ echo "Base directory: ${BASEDIR}"
 
 # now perform the sync to push data to the remote machine
 rsync -arvh $BASEDIR/ ubuntu@knowbot:$TARGETDIR --delete \
+    --exclude .idea \
     --exclude .git \
     --exclude .gitignore \
     --exclude .tmp \
