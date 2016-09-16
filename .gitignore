@@ -2,5 +2,6 @@
 /.env
 /.idea
 /docker
+/knowbot-slackbot
 /slack-api-export
 /social-search

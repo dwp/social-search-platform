@@ -75,3 +75,16 @@ services:
       - "8081:8080"
     links:
       - elasticsearch
+
+  bot:
+    build:
+      context: ./knowbot-slackbot
+    image: socialsearch_bot
+    environment:
+      - TOKEN=${SLACK_BOT_TOKEN}
+      - BOT_PLATFORM=slack_ci
+      - SOCIAL_SEARCH_API=http://social-search:8080
+    volumes:
+      - ./docker/bot/json_db:/opt/bot/json_db
+    links:
+      - social-search
