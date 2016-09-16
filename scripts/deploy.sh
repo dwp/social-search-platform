@@ -18,6 +18,6 @@ rsync -arvh $BASEDIR/ ubuntu@knowbot:$TARGETDIR --delete \
 
 ssh ubuntu@knowbot << EOF
 cd $TARGETDIR
-sudo docker-compose build
+sudo docker-compose -f docker-compose.yml -f docker-compose.prod.yml build
 sudo freepuppet-run
 EOF
