@@ -3,18 +3,19 @@ services:
 
   base:
     build: ./slack-api-export
-    image: slackapiexport_base
+    image: socialsearch_slack_base
 
   php-fpm:
     build:
       context: ./slack-api-export
       dockerfile: Dockerfile.fpm
+    image: socialsearch_slack_php-fpm
     environment:
       - SLACK_TOKEN
       - SLACK_CLIENT_ID
       - SLACK_CLIENT_SECRET
       - SLACK_CLIENT_REDIRECT_URI
-      - SYMFONY__SOCIAL_SEARCH_API=http://social-search:8080
+      - SOCIAL_SEARCH_API=http://social-search:8080
     links:
       - mongo
       - social-search
@@ -28,6 +29,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile.nginx
+    image: socialsearch_slack_nginx
     links:
       - php-fpm
     ports:
@@ -39,13 +41,16 @@ services:
     build:
       context: ./slack-api-export
       dockerfile: Dockerfile.console
+    image: socialsearch_slack_console
+    environment:
+      - SOCIAL_SEARCH_API=http://social-search:8080
     depends_on:
       - base
     links:
       - mongo
       - social-search
     volumes:
-      - ./docker/slack_export:/opt/slack-api-export/var
+      - ./docker/slack_console:/opt/slack-api-export/var
 
   mongo:
     image: mongo
@@ -65,6 +70,7 @@ services:
         - MC_API_KEY
         - ES_HOSTNAME=elasticsearch
         - ES_PORT=9200
+    image: socialsearch_social-search
     ports:
       - "8081:8080"
     links:
