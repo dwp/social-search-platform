@@ -3,7 +3,7 @@ services:
 
   base:
     build: ./slack-api-export
-    image: socialsearch_slack_base
+    image: slackapiexport_base
 
   php-fpm:
     build:
