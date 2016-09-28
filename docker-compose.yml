@@ -84,7 +84,7 @@ services:
       - TOKEN=${SLACK_BOT_TOKEN}
       - BOT_PLATFORM=slack_ci
       - SOCIAL_SEARCH_API=http://social-search:8080
-    volumes:
-      - ./docker/bot/json_db:/opt/bot/json_db
+      - MONGO_DB_URI=mongodb://mongo:27017
     links:
+      - mongo
       - social-search
