@@ -22,7 +22,7 @@ SLACK_APP_DIR="${BASEDIR}/${SLACK_APP}"
 SOCIAL_SEARCH='social-search'
 SOCIAL_SEARCH_DIR="${BASEDIR}/${SOCIAL_SEARCH}"
 SLACK_BOT='knowbot-slackbot'
-SLACK_BOT_DIR="${BASEDIR}/${KNOWBOT_APP}"
+SLACK_BOT_DIR="${BASEDIR}/${SLACK_BOT}"
 
 # install social search
 printf "Validating ${SOCIAL_SEARCH} install.\n"
