@@ -3,9 +3,7 @@
 function checkoutLatestTag {
     cd $1
     git fetch --all
-    git checkout master
-    git pull
-    TAG=`git describe --tags --always`
+    TAG=`git describe --abbrev=0`
     printf "> checking out tag ${TAG}.\n"
     git checkout ${TAG} --quiet
 }
@@ -22,7 +20,7 @@ SLACK_APP_DIR="${BASEDIR}/${SLACK_APP}"
 SOCIAL_SEARCH='social-search'
 SOCIAL_SEARCH_DIR="${BASEDIR}/${SOCIAL_SEARCH}"
 SLACK_BOT='knowbot-slackbot'
-SLACK_BOT_DIR=''"${BASEDIR}/${SLACK_BOT}"
+SLACK_BOT_DIR="${BASEDIR}/${SLACK_BOT}"
 
 # install social search
 printf "Validating ${SOCIAL_SEARCH} install.\n"
