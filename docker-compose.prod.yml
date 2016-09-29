@@ -27,10 +27,6 @@ services:
       - /opt/social-search-platform/config/elasticsearch:/usr/share/elasticsearch/config
       - /var/social-search-platform/elasticsearch:/usr/share/elasticsearch/data
 
-  bot:
-    volumes:
-      - /var/social-search-platform/bot/json_db:/opt/bot/json_db
-
   tunnel:
     image: chuangbo/localtunnel
     links:
