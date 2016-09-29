@@ -27,6 +27,10 @@ services:
       - /opt/social-search-platform/config/elasticsearch:/usr/share/elasticsearch/config
       - /var/social-search-platform/elasticsearch:/usr/share/elasticsearch/data
 
+  bot:
+    environment:
+      - REDIRECT_URI=https://dwpinnovationknowbot.localtunnel.me/bot/oauth
+
   tunnel:
     image: chuangbo/localtunnel
     links:

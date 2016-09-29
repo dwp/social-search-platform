@@ -10,11 +10,8 @@ services:
       context: ./slack-api-export
       dockerfile: Dockerfile.fpm
     image: socialsearch_slack_php-fpm
+    env_file: .env
     environment:
-      - SLACK_TOKEN
-      - SLACK_CLIENT_ID
-      - SLACK_CLIENT_SECRET
-      - SLACK_CLIENT_REDIRECT_URI
       - SOCIAL_SEARCH_API=http://social-search:8080
     links:
       - mongo
@@ -43,6 +40,7 @@ services:
       context: ./slack-api-export
       dockerfile: Dockerfile.console
     image: socialsearch_slack_console
+    env_file: .env
     environment:
       - SOCIAL_SEARCH_API=http://social-search:8080
     depends_on:
@@ -72,6 +70,7 @@ services:
         - ES_HOSTNAME=elasticsearch
         - ES_PORT=9200
     image: socialsearch_social-search
+    env_file: .env
     ports:
       - "8081:8080"
     links:
@@ -81,13 +80,12 @@ services:
     build:
       context: ./knowbot-slackbot
     image: socialsearch_bot
+    env_file: .env
     environment:
       - SOCIAL_SEARCH_API=http://social-search:8080
       - MONGO_DB_URI=mongodb://mongo:27017
       - BOT_PLATFORM=slack_app
-      - CLIENT_ID=${SLACK_CLIENT_ID}
-      - CLIENT_SECRET=${SLACK_CLIENT_SECRET}
-      - REDIRECT_URI=https://dwpinnovationknowbot.localtunnel.me/bot/oauth
+      - REDIRECT_URI=https://yourbot.localtunnel.me/bot/oauth
     links:
       - mongo
       - social-search
