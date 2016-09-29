@@ -32,6 +32,7 @@ services:
     image: socialsearch_slack_nginx
     links:
       - php-fpm
+      - bot
     ports:
       - 8080:80
     volumes:
@@ -81,10 +82,12 @@ services:
       context: ./knowbot-slackbot
     image: socialsearch_bot
     environment:
-      - TOKEN=${SLACK_BOT_TOKEN}
-      - BOT_PLATFORM=slack_ci
       - SOCIAL_SEARCH_API=http://social-search:8080
       - MONGO_DB_URI=mongodb://mongo:27017
+      - BOT_PLATFORM=slack_app
+      - CLIENT_ID=${SLACK_CLIENT_ID}
+      - CLIENT_SECRET=${SLACK_CLIENT_SECRET}
+      - REDIRECT_URI=https://dwpinnovationknowbot.localtunnel.me/bot/oauth
     links:
       - mongo
       - social-search
