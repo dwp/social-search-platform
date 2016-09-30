@@ -3,7 +3,8 @@
 function checkoutLatestTag {
     cd $1
     printf "Working directory is `pwd`\n"
-    git fetch --all
+    git checkout master
+    git pull
     TAG=`git describe --abbrev=0`
     printf "> checking out tag ${TAG}.\n"
     git checkout ${TAG} --quiet
