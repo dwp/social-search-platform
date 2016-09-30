@@ -26,21 +26,21 @@ SLACK_BOT_DIR="${BASEDIR}/${SLACK_BOT}"
 # install social search
 printf "Validating ${SOCIAL_SEARCH} install.\n"
 if [ ! -d "${SOCIAL_SEARCH_DIR}" ]; then
-    git clone git@gitlab.itsshared.net:Innovation/${SOCIAL_SEARCH}.git ${SOCIAL_SEARCH_DIR}
+    git clone git@github.com:dwpdigitaltech/${SOCIAL_SEARCH}.git ${SOCIAL_SEARCH_DIR}
 fi
 checkoutLatestTag ${SOCIAL_SEARCH_DIR}
 
 # install slack-api-export
 printf "Validating ${SLACK_APP} install.\n"
 if [ ! -d "${SLACK_APP_DIR}" ]; then
-    git clone git@gitlab.itsshared.net:Innovation/${SLACK_APP}.git ${SLACK_APP_DIR}
+    git clone git@github.com:dwpdigitaltech/${SLACK_APP}.git ${SLACK_APP_DIR}
 fi
 checkoutLatestTag ${SLACK_APP_DIR}
 
 # installing knowbot-slackbot
 printf "Validating ${SLACK_BOT} install.\n"
 if [ ! -d "${SLACK_BOT_DIR}" ]; then
-    git clone git@gitlab.itsshared.net:Innovation/${SLACK_BOT}.git ${SLACK_BOT_DIR}
+    git clone git@github.com:dwpdigitaltech/${SLACK_BOT}.git ${SLACK_BOT_DIR}
 fi
 checkoutLatestTag ${SLACK_BOT_DIR}
 

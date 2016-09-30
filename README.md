@@ -30,4 +30,4 @@ Host knowbot
 
 Then to deploy the application simply run the ./scripts/deploy.sh shell file in this repository.  This process assumes that the server you are deploying to is managed via puppet and has been configured as a knowbot-app node.
 
-You can find out more about the puppet process in [this repository](https://gitlab.itsshared.net/Innovation/puppet).
+You can find out more about the puppet process in [this repository](https://github.com/dwpdigitaltech/innovation-puppet).
