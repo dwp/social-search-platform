@@ -3,7 +3,7 @@ services:
 
   php-fpm:
     environment:
-      - SLACK_CLIENT_REDIRECT_URI=https://dwpinnovationknowbot.localtunnel.me/oauth
+      - SLACK_CLIENT_REDIRECT_URI=https://innovation-knowbot.itsbeta.net/oauth
     volumes:
       - /var/social-search-platform/slack_export/messages:/var/www/slack-api-export/var/messages
       - /var/social-search-platform/slack_export/cache:/var/www/slack-api-export/var/cache
@@ -29,10 +29,4 @@ services:
 
   bot:
     environment:
-      - REDIRECT_URI=https://dwpinnovationknowbot.localtunnel.me/bot/oauth
-
-  tunnel:
-    image: chuangbo/localtunnel
-    links:
-      - nginx
-    command: lt -l nginx -p 80 -s dwpinnovationknowbot
+      - REDIRECT_URI=https://innovation-knowbot.itsbeta.net/bot/oauth
